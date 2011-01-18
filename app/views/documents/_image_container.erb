@@ -1,0 +1,14 @@
+<tr id="item_<%= @asset.id %>" class="float">
+	<% if @asset.image? %>
+		<td class="file-item file-thumb"><%= link_to_remote_redbox(image_tag(@asset.url(:tiny)), :url=>{:action=>:show_image, :id=>asset.id}) %></td>
+	<% else %>
+		<td class="file-item file-thumb"></td>
+	<% end %>
+	<td class="file-item file-name"><%= @asset.data_file_name %></td>
+	<td class="file-item file-url"><%= @asset.url %></td>
+	<td class="file-item file-visible">
+		<% visible = @asset.visible ? '<span class="yes">Yes</span>' : '<span class="no">No</span>' %>
+		<%= link_to_remote  visible, :url => { :action=>'image_change_visibility',:id=>@asset.id }, :html=>{:id=>"visibility-#{@asset.id}"}  %> 
+	<td class="file-item"><%= link_to_remote image_tag('delete-16.png'), :url => { :action=>'destroy_asset',:id=>@asset.id } %></td>
+	</tr>
+</tr>

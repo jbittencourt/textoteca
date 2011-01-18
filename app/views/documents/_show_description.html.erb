@@ -1,0 +1,27 @@
+<div id="document_description">
+	<%= if @document.description.include?('<')
+			@document.description
+		else
+			@document.description.gsub!(/\n/, '<br />') 
+		end 
+	%>
+</div>
+
+
+<div id="files-area">
+	<div id="image-list">
+		<h2><%=t :images_list %></h2>
+		<div id='images-container'>
+			<ul>
+				<% for asset in @document.assets %>
+					<% if asset.image?  and asset.visible %>
+						<li>
+							<%= link_to_remote_redbox(image_tag(asset.url(:thumb)), :url=>{:action=>:show_image, :id=>asset.id}) %>
+							<span class="file-name"><%= asset.name %></span>
+						</li>
+					<% end %>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+</div>

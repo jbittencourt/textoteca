@@ -1,0 +1,19 @@
+<% rounded_box :id=>'document-view' do %>
+
+	<ul class='edit-buttoms'>
+		<li><%= link_to image_tag('back-48.png'), :controller => 'documents', :action => 'index'%></li>
+	</ul>
+
+	<h1><%=t :list_featured %></h1>
+
+	<ul id="sections-list">
+	<% for featured in @featureds %>
+	    <li><%= featured.document.title %>
+	    	<%= link_to image_tag('delete-16.png'), featured, :confirm => t(:sure), :method => :delete %>
+	  	</li>
+	<% end %>
+	</ul>
+
+	<br />
+
+<% end %>

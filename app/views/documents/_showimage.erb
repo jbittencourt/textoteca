@@ -1,0 +1,8 @@
+<%= image_tag @asset.url(:large), :id=>"redbox_image" %>
+
+<div id="redbox_download">
+	<%= link_to "Download", @asset.url %>
+</div>
+<div id="redbox_close">
+	<%= link_to_close_redbox('Close') %>
+</div>

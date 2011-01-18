@@ -1,0 +1,17 @@
+<% form_for @document, :html => {} do |f| %>
+  <%= f.error_messages %>
+
+  <p><%= label_tag :title, t(:title)%> <%= f.text_field :title %></p>
+  
+  <p><%= label_tag :section, t(:section) %> <%= f.select :section_id, @sections.collect {|c| [ c.title, c.id ]} %></p>
+  <br/>
+  <p><%= f.text_area :description, :class => "mceEditor" %></p>
+
+  <p><%= label_tag :tag_list, t(:tags) %> <%= f.text_field :tag_list %>
+
+  <p>
+    <%= f.submit t(:create) %>
+  </p>
+<% end %>
+
+<p> <%= render :partial => 'attachments' %> </p>

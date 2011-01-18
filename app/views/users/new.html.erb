@@ -1,0 +1,21 @@
+<% rounded_box :id=>'users-view' do %>
+	<h1><%= t :create_acc %></h1>
+
+	<%= error_messages_for :user %>
+	<% form_for :user, :url => users_path do |f| -%>
+		<p><label for="login"><%= t :name %></label><br/>
+		<%= f.text_field :name %></p>
+
+		<p><label for="email"><%= t :email %></label><br/>
+		<%= f.text_field :email %></p>
+
+		<p><label for="password"><%= t :password %></label><br/>
+		<%= f.password_field :password %></p>
+
+		<p><label for="password_confirmation"><%= t :confirm %></label><br/>
+		<%= f.password_field :password_confirmation %></p>
+
+		<p><%= submit_tag t(:signup) %></p>
+	<% end %>
+
+<% end %>

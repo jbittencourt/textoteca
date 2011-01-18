@@ -1,0 +1,51 @@
+<% rounded_box :id=>'document-view' do %>
+
+	<ul class='edit-buttoms'>
+		<li><%= link_to image_tag('back-48.png'), :controller => 'documents', :action => 'list', :id =>  @document.section_id %></li>
+		<% if logged_in? %>
+			<% if (@document.user_id == current_user.id) or admin? %>
+				<li><%= link_to image_tag('edit_text.png'), edit_document_path(@document) %></li>
+			<% end %>
+		<% end %>
+		<% if admin? %>
+			<li><%= link_to image_tag('feature-48.png'), :controller => 'featureds', :action => 'feature', :id =>  @document %></li>
+			<li><%= link_to image_tag('delete_text.png'), @document, :confirm => t(:sure), :method => :delete %></li>
+		<% end %>
+	</ul>
+
+	<h1><%= @document.title %></h1>
+	<div id="tags"><%=t :tags %>
+		<% for tag in @document.tag_list %>
+			<li><%= link_to tag, {:action => 'list_tag', :id => tag } %></li>
+		<% end %>
+	</div>
+
+	<%= render :partial => "ratings/rate", :locals => { :asset => @document } %>
+	
+	<div id="ads">
+		<script type="text/javascript"><!--
+		google_ad_client = "pub-9132546011521806";
+		/* textoteca documents */
+		google_ad_slot = "6288769648";
+		google_ad_width = 120;
+		google_ad_height = 600;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+	</div>
+
+	<% if @document.description.blank? and not @document.assets.empty? %>
+		<%= render :partial => 'show_images' %>
+	<% else %>
+		<%= render :partial => 'show_description' %>
+	<% end %>
+
+	<div id='comments'>
+		<div id='comments-list'><%= spinner :id=>'spinner',:visible=>true %> <span id='loading_comments'><%=t :loading %></span></div>
+	</div>
+	<%= javascript_tag remote_function :url => {:action=>'list_comments',:id=>@document.id} %>
+
+
+<% end %>

@@ -1,0 +1,16 @@
+<% rounded_box :id=>'document-view' do %>
+<h1><%=t :edit %></h1>
+
+<% form_for(@section) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :title,'Title' %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.submit :modify %>
+  </p>
+<% end %>
+
+<% end %>

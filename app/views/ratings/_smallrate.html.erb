@@ -1,0 +1,8 @@
+<span class='small-star-rating'>
+<% avarage = asset.rating_average.blank? ? 0 : asset.rating_average  %>
+
+<% (0...avarage).each do |x| %>
+	<%= image_tag 'star-16.png' %>
+<% end %>
+
+</span>

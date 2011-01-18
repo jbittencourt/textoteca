@@ -1,0 +1,20 @@
+<% rounded_box :id=>'document-view' do %>
+	<h1><%=t :listing_documents %></h1>
+
+	<ul id='documents-list'>
+		<% for document in @documents %>
+			<li><%= link_to document.title.empty? ? t(:no_title): document.title, document %>
+				<% if !document.assets.blank? %>
+					<%= image_tag 'attachment.png' %>
+				<% end %>
+		
+				<% if document.created_at > @date_new %>
+					<%= image_tag 'new.png' %>
+				<% end %>	
+		
+				<%= render :partial => 'ratings/smallrate',:locals => { :asset=>document }%>
+			</li>
+		<% end %>
+	</ul>
+
+<%end%>

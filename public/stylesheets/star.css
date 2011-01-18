@@ -1,0 +1,89 @@
+.star-rating,
+.star-rating a:hover,
+.star-rating a:active,
+.star-rating a:focus,
+.star-rating .current-rating {
+	background: url(../images/star_empty-24.png) repeat-x;
+}
+.star-rating {
+	position: relative;
+	width: 120px;
+	height: 24px;
+	overflow: hidden;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.star-rating li{
+	display: inline;
+}
+.star-rating a,
+.star-rating .current-rating {
+	position: absolute;
+	top: 0;
+	left: 0;
+	text-indent: -1000em;
+	height: 24px;
+	line-height: 24px;
+	outline: none;
+	overflow: hidden;
+	border: none;
+}
+.star-rating a:hover,
+.star-rating a:active,
+.star-rating a:focus {
+	background: url(../images/star-full-24.png) repeat-x;
+
+}
+.star-rating a.one-stars{
+	width: 20%;
+	z-index: 6;
+}
+.star-rating a.two-stars{
+	width: 40%;
+	z-index: 5;
+}
+.star-rating a.three-stars{
+	width: 60%;
+	z-index: 4;
+}
+.star-rating a.four-stars{
+	width: 80%;
+	z-index: 3;
+}
+.star-rating a.five-stars{
+	width: 100%;
+	z-index: 2;
+}
+.star-rating .current-rating {
+	z-index: 1;
+	background: url(../images/star-24.png) repeat-x;
+}
+
+.star-ratings-block {
+	font-size: .75em;
+	width: 100%;
+}
+
+#star-votes {
+	font-weight: bold;
+	font-size: 85%;
+	color: #CE241C;
+	vertical-align: baseline;
+	margin-left: 25px;	
+}
+
+.small-star-rating {
+	margin-left: 40px;
+	font-size: 0;
+}
+
+.small-star-rating img {
+	margin: 0;
+	padding: 0;
+}
+
+#new-list-frontpage span.small-star-rating {
+	margin-left: 0px;
+	font-size: 0;
+}

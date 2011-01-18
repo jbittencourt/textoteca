@@ -1,0 +1,11 @@
+#global-wrapper {
+	height: 100%;
+}
+
+#document-view {
+    zoom: 1;     /* triggers hasLayout */
+}
+
+#image-list ul li {
+	display: inline-block;
+}

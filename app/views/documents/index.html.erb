@@ -1,0 +1,43 @@
+<div class='column-two'>
+	<div class='column-left'>
+		<% rounded_box :id=>'welcome-box' do %>
+			welcome
+		<% end %>
+		
+ 		<div class='spacer'></div>
+		<% rounded_box :id=>'new',:class=>'first-page-box' do %>
+			<h1><%= image_tag 'new-32.png',:class=>'image-centered' %><%=t :just_added %>
+				</h1>
+			<div id='new-box'>
+				<%= spinner :id=>'spinner',:visible=>true %> <span id='loading_comments'><%=t :loading %></span>
+			</div>
+			<%= javascript_tag remote_function(:url => {:controller=>'documents', :action=>'list_new_frontpage'}) %>
+		<% end %>
+	</div>
+
+	<div class='column-right'>
+		
+		<% rounded_box :id=>'best-rating',:class=>'first-page-box' do %>
+			<h1><%= image_tag 'star-32.png',:class=>'image-centered' %><%=t :best_rated %>
+				</h1>
+			<div id='best-rating-box'>
+				<%= spinner :id=>'spinner',:visible=>true %> <span id='loading_comments'><%=t :loading %></span>
+			</div>
+			<%= javascript_tag remote_function(:url => {:controller=>'documents', :action=>'list_best_rating_frontpage'}) %>
+		<% end %>
+		
+		<div class='spacer'></div>
+		<% rounded_box :id=>'featureds',:class=>'first-page-box' do %>
+			<h1><%= image_tag 'home-32.png',:class=>'image-centered' %><%=t :suggested %>
+				<% if admin? %>
+					<%= link_to image_tag('edit-24.png',:class=>'image-centered'), :controller=>'featureds' %>
+				<% end %>
+				</h1>
+			<div id='featureds-box'>
+				<%= spinner :id=>'spinner',:visible=>true %> <span id='loading_comments'><%=t :loading %></span>
+			</div>
+			<%= javascript_tag remote_function(:url => {:controller=>'featureds', :action=>'list_frontpage'}) %>
+		<% end %>
+	</div>
+
+</div>

@@ -1,0 +1,47 @@
+<h2> <%=t :comments, :count=>@comments.total_entries %></span></h2>
+
+	<div class="comments-paginator"><%= will_paginate @comments %></div>
+
+	<% for comment in @comments %>
+	    <%  if @hide==comment.id
+				style = 'display: none'
+			else 
+				style =''
+			end
+		 %>
+		<% rounded_box :id=>"comment-#{comment.id}",:class=>'green-box', :style=>style do %>
+			<div class="comment-header">
+				
+				<% if admin? %>
+					<div class='comments-delete'>
+						<%= link_to_remote image_tag('delete_comment.png'), :confirm=>t(:sure), :url => {:action=>'destroy_comment', :id=>comment.id} %>
+					</div>
+				<% end %>
+				
+				<span class="comment-title"><%= comment.title %></span>
+				
+				<% 	
+					if ! comment.user.blank? 
+						author = comment.user.name
+						if admin?
+							author = author+' <'+comment.user.email+'>'
+						end
+				   	else
+						author = comment.name
+						if admin? and ! comment.email.blank?
+							author = author+' <'+comment.email+'>'
+						end
+				   	end
+				%>
+				<span class="comment-author"> <%=t :sent_by, :author=>author,:time=>comment.created_at.strftime("%d/%m/%Y, %H:%M") %></span>
+			
+			</div>
+			<div><%= comment.comment %></div>
+		<% end %>
+	<% end %>
+	
+	<div class="comments-paginator"><%= will_paginate @comments %></div>
+
+	<div id="comment-new">
+		<%= render :partial=>'comment_form' %>
+	</div>

@@ -1,0 +1,40 @@
+<div id='upload-images'>
+	<h2><%= image_tag 'attachment-24.png', :class=>'image-centered' %>Images</h2>
+	<div>
+		<table id="upload-image-list">
+			<tr class='table-header'>
+				<td><%=t :thumb%></td>
+				<td><%=t :file_name%></td>
+				<td><%=t :link %></td>
+				<td><%=t :list_q %></td>
+				<td><%=t :delete %></td>
+			</tr>
+			<% if not @assets.blank? %>
+				<% for @asset in @assets %>
+					<%= render :partial => "image_container", :locals => { :asset => @asset } %>
+				<% end %>
+			<% end %>
+		</table>
+	</div>
+
+
+	<% 
+	#sortable_element('sortable_list', :constraint => false, :url => {:action => :update_positions}) 
+	%>
+
+	<div id="files_area">  
+		<%= form_remote_tag(:url => {  
+			:controller => :documents,
+			:action => :create_asset },             
+			:html => {:multipart => true},
+			:update => "attachments",
+			:loading => %(Element.show('spinner_image_upload')) ) %>
+
+			<b><%=t :attach_file %></b>&nbsp;
+			<%= file_field_tag "asset[data]" %>&nbsp;
+			<%= submit_tag :upload %>&nbsp;
+			<%= spinner :id => "spinner_image_upload" %>	
+		</form>
+	</div>
+
+</div>

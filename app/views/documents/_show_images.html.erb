@@ -1,0 +1,11 @@
+<div id='images-full'>
+	<% for asset in @document.assets %>
+		<% if asset.image? and asset.visible %>
+
+			<% #link_to_remote_redbox(image_tag(asset.url(:thumb)), :url=>{:action=>:show_image, :id=>asset.id}) %>
+			<%= image_tag asset.url %>
+
+		<% end %>
+	<% end %>
+</div>
+

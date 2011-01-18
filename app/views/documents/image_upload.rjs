@@ -1,0 +1,10 @@
+if @asset.new_record?
+  page.alert t(:problem_uploading)
+  page.hide 'spinner_image_upload'
+  #@asset.errors.full_messages.join("\n")
+else
+  page.insert_html :bottom, 'upload-image-list', :partial => 'image_container', :locals => { :asset => @asset } 
+  page.visual_effect :highlight, "item_#{@asset.id}"
+  page.hide 'spinner_image_upload'
+  #page.sortable "sortable_list", :constraint => false, :url => { :action => :update_positions }
+end

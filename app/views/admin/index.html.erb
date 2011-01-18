@@ -1,0 +1,13 @@
+<% rounded_box :id=>'users-view' do %>
+	<h1><%=t :listing_users %></h1>
+
+	<ul id='users-list'>
+		<% for user in @users %>
+			<li><%= user.name  %> 
+				<%=  "<" + user.email + ">" unless user.email.empty? %>
+				
+			</li>
+		<% end %>
+	</ul>
+
+<%end%>

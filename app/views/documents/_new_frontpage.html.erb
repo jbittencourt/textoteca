@@ -1,0 +1,6 @@
+<ul id="new-list-frontpage">
+	<% for document in @documents %>
+	    <li><%= link_to document.title, document %>
+	  	</li>
+	<% end %>
+</ul>

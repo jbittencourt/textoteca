@@ -1,0 +1,6 @@
+<ul id="featured-list-frontpage">
+<% for featured in @featureds %>
+    <li><%= link_to featured.document.title, featured.document %>
+  	</li>
+<% end %>
+</ul>

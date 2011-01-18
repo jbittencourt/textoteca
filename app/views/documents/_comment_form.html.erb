@@ -1,0 +1,16 @@
+<h2><%=t :submit_comment%></h2>
+<% form_remote_for @comment, :url => {:action=>'create_comment', :id=>@document_id} do |f| %>
+  	<%= f.error_messages %>
+	  	
+		<% if ! logged_in? %>
+      		<p><%= label_tag :title, t(:name)%> <%= f.text_field :name %></p>
+	  		<p><%= label_tag :title, t(:email)%> <%= f.text_field :email %></p>
+		<% end %>
+  		<p><%= label_tag :title, t(:title)%> <%= f.text_field :title %></p>
+	  <br/>
+	  <p><%= f.text_area :comment, :rows=>5 %></p>
+
+	  <p>
+	    <%= f.submit t(:comment_submit) %>
+	  </p>
+<% end %>

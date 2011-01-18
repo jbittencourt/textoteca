@@ -1,0 +1,24 @@
+<% if current_user.facebook_user? %>
+	
+	<div class='userpicture'> 
+		<fb:profile-pic uid="<%= current_user.fb_user_id%>" facebook-logo="true" size="thumb" ></fb:profile-pic>
+	</div>
+	<span class='username'><fb:name uid="<%= current_user.fb_user_id %>"></fb:name></span>
+
+	<div class='logout'><a href="#" onclick='FB.Connect.logoutAndRedirect("/logout")'>Logout</a></div>
+
+<% else %>
+	<div class='userpicture'> 
+		<%= gravatar %>
+	</div>
+	<span class='username'><%= current_user.name %></span>
+	<ul>
+    	<li><%= image_tag 'edit_profile.png', :class=>'image-centered' %>
+		<%= link_to t(:change_personal_info), {:controller=>'users', :action=>'edit', :id=>current_user}, {:class=>'image-centered'} %></li>
+	</ul>
+
+	<div class='logout'><%= link_to t(:logout), :controller => 'sessions',:action => 'destroy', :id => current_user.id %></div>
+
+<% end %>
+
+<div class='clear'></div>

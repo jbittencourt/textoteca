@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<title>Documents: <%= controller.action_name %></title>
+
+	<%= stylesheet_link_tag 'main' %>
+	<%= stylesheet_link_tag 'redbox' %>
+	<%= stylesheet_link_tag 'star' %>
+	<%# we need to include prototype, etc... %>
+	<%= javascript_include_tag :defaults %>
+	<%= javascript_include_tag 'redbox' %>
+	<!--[if lte IE 6]>
+		<%= stylesheet_link_tag 'iefixes' %>
+	<![endif]-->
+	 <%= include_tiny_mce_if_needed %>
+	</head>
+	<body>
+		<%= fb_connect_javascript_tag %>
+		<%= init_fb_connect "XFBML"%>
+
+		<div id="global-wrapper">
+			<div id='header'>
+				<div id='logo'><%= image_tag 'logo.png' %></div>
+					<% if logged_in? %>
+						<% rounded_box :id=>'profile-box' do %>
+							<%= render :partial=>'users/profile' %>
+						<% end %>	
+					<% else %>
+						<% rounded_box :id=>'login-box' do %>
+							<%= render :partial=>'shared/login' %>
+						<% end %>
+					<% end %>
+			</div>
+			<div id='primary-nav'>
+				<div><%= link_to t(:send_text), {:controller => :documents, :action => :new }, :id=>'submit_text' %></div>
+
+				<div id='tags-nav'>
+					<h2><%=t :tags %></h2>
+					<ul id='tags-list'>
+						<% if @tags==nil %>
+							<li><%t :no_tags %></li>
+						<% else %>
+							<% tag_cloud @tags, %w(tag1 tag2 tag3 tag4) do |tag, css_class| %>
+						    	<%= link_to tag.name, { :controller => "documents", :action => 'list_tag', :id => tag.name }, :class => css_class %>
+							<% end %>
+						<% end %>
+					</ul>
+				</div>
+				
+				<div id='sections-nav'>
+					<h2>
+						<%=t :sections %>
+						<% if admin? %>
+							<%= link_to image_tag('edit-24.png',:class=>'edit-icon',:class=>'image-centered'),:controller=>'sections',:action=>'index'%>
+						<% end %>
+					</h2>
+					<ul id='sections'>
+					<% for section in @sections %>
+					  <% title =  "#{section.title} (#{section.documents.size})" %>
+					  <li class='sections-item'><%= link_to title, :controller => "documents", :action => "list", :id => section.id %></li>
+					<% end %>
+					</ul>
+				</div>
+			</div>
+
+			<div id='content'>
+				<% if ! flash[:notice].blank? %>
+					<div id='notice-box'><%= flash[:notice] %></div>
+				<% end %>
+				<%= yield  %>
+			</div>
+
+
+		</div>
+		
+		<div id="footer">
+			<div></div>
+		</div>
+	</body>
+	</html>
